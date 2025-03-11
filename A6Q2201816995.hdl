@@ -1,1 +1,36 @@
+CHIP A6Q2201816995 {
 
+IN a, b, c, d;
+OUT f;
+
+PARTS:
+//Nots
+Not(in=a, out=Na);
+Not(in=b, out=Nb);
+Not(in=c, out=Nc);
+Not(in=d, out=Nd);
+
+//aNbNcNd
+And(a=a, b=Nb, out=aNb);
+And(a=Nc, b=Nd, out=NcNd);
+And(a=aNb, b=NcNd, out=joint1);
+
+//acd
+And(a=a, b=~c, out=ac);
+And(a=ac, b=d, out=joint2);
+
+//NaNbcNd
+And(a=Na, b=Nb, out=NaNb);
+And(a=c, b=Nd, out=cNd);
+And(a=NaNb, b=cNd, out=joint3);
+
+//bcd
+And(a=b, b=c, out=bc);
+And(a=bc, b=d, out=joint4);
+
+//Put together
+
+Or(a=joint1, b=joint2, out=part1);
+Or(a=joint3, b=joint4, out=part2);
+Or(a=part1, b=part2, out=f);
+}
