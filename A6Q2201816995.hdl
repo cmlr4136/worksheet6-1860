@@ -16,7 +16,7 @@ And(a=Nc, b=Nd, out=NcNd);
 And(a=aNb, b=NcNd, out=joint1);
 
 //acd
-And(a=a, b=~c, out=ac);
+And(a=a, b=c, out=ac);
 And(a=ac, b=d, out=joint2);
 
 //NaNbcNd
